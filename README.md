@@ -9,7 +9,7 @@ Netbox Plugin Extending VRF Support
 
 ## Features
 
-The features the plugin provides should be listed here.
+Provides an extension to VRF with the ability to define an instance to a specific device, overriding RD/RTs. 
 
 ## Compatibility
 
@@ -39,7 +39,7 @@ Enable the plugin in `/opt/netbox/netbox/netbox/configuration.py`,
 
 ```python
 PLUGINS = [
-    'netbox-vrf-ext'
+    'netbox_vrf_ext'
 ]
 
 PLUGINS_CONFIG = {
