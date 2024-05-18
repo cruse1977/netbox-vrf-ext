@@ -1,19 +1,14 @@
 from django.urls import path
 from netbox.views.generic import ObjectChangeLogView
-
-from . import models, views
-
+from . import views, models
 
 urlpatterns = (
-    path("netbox-vrf-exts/", views.netbox_vrf_extListView.as_view(), name="netboxvrfext_list"),
-    path("netbox-vrf-exts/add/", views.netbox_vrf_extEditView.as_view(), name="netboxvrfext_add"),
-    path("netbox-vrf-exts/<int:pk>/", views.netbox_vrf_extView.as_view(), name="netboxvrfext"),
-    path("netbox-vrf-exts/<int:pk>/edit/", views.netbox_vrf_extEditView.as_view(), name="netboxvrfext_edit"),
-    path("netbox-vrf-exts/<int:pk>/delete/", views.netbox_vrf_extDeleteView.as_view(), name="netboxvrfext_delete"),
-    path(
-        "netbox-vrf-exts/<int:pk>/changelog/",
-        ObjectChangeLogView.as_view(),
-        name="netboxvrfext_changelog",
-        kwargs={"model": models.netbox_vrf_ext},
-    ),
+    path('vrfinstance/', views.VRFInstanceListView.as_view(), name = "vrfinstance_list"),
+    path('vrfinstance/add', views.VRFInstanceEditView.as_view(), name = "vrfinstance_add"),
+    path('vrfinstance/<int:pk>', views.VRFInstanceView.as_view(), name = "vrfinstance"),
+    path('vrfinstance/<int:pk>/edit', views.VRFInstanceEditView.as_view(), name = "vrfinstance_edit"),
+    path('vrfinstance/<int:pk>/delete', views.VRFInstanceDeleteView.as_view(), name = "vrfinstance_delete"),    
+    path('vrfinstance/<int:pk>/changelog/', ObjectChangeLogView.as_view(), name='vrfinstance_changelog', kwargs={
+        'model': models.VRFInstance
+    }),
 )

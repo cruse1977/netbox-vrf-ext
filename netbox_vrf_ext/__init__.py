@@ -1,19 +1,22 @@
 """Top-level package for NetBox VRF Extensions."""
-
-__author__ = """Chris Russell"""
-__email__ = "cruse1977123@gmail.com"
-__version__ = "0.1.0"
-
-
 from netbox.plugins import PluginConfig
+from .version import __version__
 
 
-class netbox_vrf_extConfig(PluginConfig):
-    name = "netbox_vrf_ext"
-    verbose_name = "NetBox VRF Extensions"
-    description = "Netbox Plugin Extending VRF Support"
-    version = "version"
-    base_url = "netbox_vrf_ext"
+class VRFExtConfig(PluginConfig):
+    name = 'netbox_vrf_ext'
+    verbose_name = 'netbox_vrf_ext'
+    description = 'extended vrf related objects'
+    version = __version__
+    author = 'Chris Russell'
+    author_email = 'cruse1977123@gmail.com'
+    base_url = 'vrf-ext'
+    required_settings = []
+    min_version = '4.0.2'
+    max_version = '4.0.99'
+    default_settings = {
+        'device_ext_page': 'right',
+        'top_level_menu' : False,
+    }
 
-
-config = netbox_vrf_extConfig
+config = VRFExtConfig 

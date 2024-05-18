@@ -1,12 +1,61 @@
 from django import forms
-from ipam.models import Prefix
-from netbox.forms import NetBoxModelForm, NetBoxModelFilterSetForm
 from utilities.forms.fields import CommentField, DynamicModelChoiceField
+from django.utils.translation import gettext_lazy as _
+from netbox.forms import NetBoxModelForm
+from utilities.forms.fields import DynamicModelChoiceField, DynamicModelMultipleChoiceField, CommentField
+from dcim.models import Device
+from ipam.models import RouteTarget, VRF
+from .models import VRFInstance
 
-from .models import netbox_vrf_ext
+class VRFInstanceForm(NetBoxModelForm):
+    import_targets = DynamicModelMultipleChoiceField(
+        label=_('Import targets'),
+        queryset=RouteTarget.objects.all(),
+        query_params = {
+            'vrf_id': '$vrf',
+            'fields': 'import_targets'
+        },
+        required=False
+    )
+    export_targets = DynamicModelMultipleChoiceField(
+        label=_('Export targets'),
+        queryset=RouteTarget.objects.all(),
+        query_params = {
+            'vrf_id': '$vrf',
+            'fields': 'export_targets'
+        },
+        required=False
+    )
+    
 
+    device = DynamicModelChoiceField(
+        queryset = Device.objects.all()
+    )
 
-class netbox_vrf_extForm(NetBoxModelForm):
+    vrf = DynamicModelChoiceField(
+        queryset = VRF.objects.all()
+    )
+    comments = CommentField()
+
+    fieldsets = (
+        (_('Applied Device'), ('device',)),
+        (_('VRF'), ('vrf', 'rd', )),
+        (_('Route Targets'), ('import_targets', 'export_targets',)),
+        (_('tenant'), ('tenant',)),
+        (_('Metadata'), ('tags',)),
+    )
+    #labels = {
+    #    'rd': 'RD'
+    #}
+
     class Meta:
-        model = netbox_vrf_ext
-        fields = ("name", "tags")
+        model = VRFInstance
+        fields = [
+            'vrf', 'rd',
+            'device', 
+            'import_targets', 'export_targets', 
+            'tenant',
+            'tags',
+            'comments'
+        ]
+
