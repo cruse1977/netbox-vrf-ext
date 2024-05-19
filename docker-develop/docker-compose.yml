@@ -6,8 +6,6 @@ services:
       dockerfile: docker-develop/Dockerfile
     command: >
       sh -c "python manage.py migrate &&
-             python manage.py makemigrations netbox_vrf_ext &&
-             python manage.py migrate &&
              python manage.py runserver 0.0.0.0:8000"
     ports:
       - '8000:8000'
