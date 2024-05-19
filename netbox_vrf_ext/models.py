@@ -75,3 +75,4 @@ class VRFInstance(NetBoxModel):
 
     def get_absolute_url(self):
         return reverse('plugins:netbox_vrf_ext:vrfinstance', args=[self.pk])
+    
