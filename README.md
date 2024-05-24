@@ -1,4 +1,4 @@
-# NetBox Access Lists Plugin
+# NetBox VRF Extensions Plugin
 
 A [Netbox](https://github.com/netbox-community/netbox) plugin for more realistically modelling service provider VRF environments.
 
@@ -6,29 +6,32 @@ A [Netbox](https://github.com/netbox-community/netbox) plugin for more realistic
 
 This plugin provides the following model:
 
-- VRF Instance - a model to define an instance of a VRF associated with a device.
+-   VRF Instance - a model to define an instance of a VRF associated with a device.
 
 Additionally the VRF Instance allows:
 
-- Optional specification of an associated loopback interface
-- Optional list of interfaces on this device configured within the VRF Instance
-- Override of primary VRF route distinguishers and route targets
+-   Optional specification of an associated loopback interface
+-   Override of primary VRF route distinguishers and route targets
 
-## Contributing
+### Object Model Overview
 
-This project is currently maintained jointly by:
-
-- [Chris Russell](https://github.com/cruse1977)
-
-See the [CONTRIBUTING](CONTRIBUTING.md) for more information.
+![Object Model Overview](docs/model.png)
 
 ## Compatibility
 
 Each Plugin Version listed below has been tested with its corresponding NetBox Version.
 
 | NetBox Version | Plugin Version |
-|:--------------:|:--------------:|
-|      4.0      |     1.0.0      |
+| :------------: | :------------: |
+|      4.0       |     1.0.0      |
+
+## Contributing
+
+This project is currently maintained jointly by:
+
+-   [Chris Russell](https://github.com/cruse1977)
+
+See the [CONTRIBUTING](CONTRIBUTING.md) for more information.
 
 
 ## Installing
@@ -51,7 +54,7 @@ netbox-acls
 ## Configuration
 
 Enable the plugin in `/opt/netbox/netbox/netbox/configuration.py`,
- or if you use netbox-docker, your `/configuration/plugins.py` file :
+or if you use netbox-docker, your `/configuration/plugins.py` file :
 
 ```python
 PLUGINS = [
@@ -65,6 +68,7 @@ PLUGINS_CONFIG = {
 ```
 
 To add the required `netbox-vrf-ext` tables to your NetBox database, run the `migrate` manager subcommand in the NetBox virtual environment:
+
 ```
 cd /opt/netbox
 sudo ./venv/bin/python3 netbox/manage.py makemigrations
@@ -75,19 +79,28 @@ sudo ./venv/bin/python3 netbox/manage.py migrate
 
 ### Docker Container
 
- The docker-develop directory contains a fully functioning docker setup to create a development environment. This includes a netbox 4.x instance with the plugin installed.
+The docker-develop directory contains a fully functioning docker setup to create a development environment. This includes a netbox 4.x instance with the plugin installed.
 
- Directions for use
+Directions for use
 
- ```
- cd docker-develop
- docker compose pull
- docker compose build
- docker compose up
- docker exec -it docker-develop-netbox-1 /opt/netbox/netbox/manage.py createsuperuser
- ```
+```
+cd docker-develop
+docker compose pull
+docker compose build
+docker compose up
+docker exec -it docker-develop-netbox-1 /opt/netbox/netbox/manage.py createsuperuser
+```
 
 Your netbox instance will be served under 0.0.0.0:8000, so it should now be available under localhost:8000.
+
+#### Optional Custom Fields ####
+
+* Optional Fields on Prefix, IPAddress, Interface
+
+```
+cd /opt/netbox
+sudo ./venv/bin/python3 netbox/manage.py setup_vrfinstance_fields
+
 
 ## Screenshots
 
