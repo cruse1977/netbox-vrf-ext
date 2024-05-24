@@ -48,10 +48,8 @@ pip install netbox-vrf-ext
 or by adding to your `local_requirements.txt` or `plugin_requirements.txt` (netbox-docker):
 
 ```bash
-netbox-acls
+netbox-vrf-ext
 ```
-
-## Configuration
 
 Enable the plugin in `/opt/netbox/netbox/netbox/configuration.py`,
 or if you use netbox-docker, your `/configuration/plugins.py` file :
@@ -74,6 +72,14 @@ cd /opt/netbox
 sudo ./venv/bin/python3 netbox/manage.py makemigrations
 sudo ./venv/bin/python3 netbox/manage.py migrate
 ```
+### Optional Custom Fields ####
+
+* Optional Fields on Prefix, IPAddress, Interface
+
+```
+cd /opt/netbox
+sudo ./venv/bin/python3 netbox/manage.py setup_vrfinstance_fields
+```
 
 ## Developing
 
@@ -93,13 +99,6 @@ docker exec -it docker-develop-netbox-1 /opt/netbox/netbox/manage.py createsuper
 
 Your netbox instance will be served under 0.0.0.0:8000, so it should now be available under localhost:8000.
 
-#### Optional Custom Fields ####
-
-* Optional Fields on Prefix, IPAddress, Interface
-
-```
-cd /opt/netbox
-sudo ./venv/bin/python3 netbox/manage.py setup_vrfinstance_fields
 
 
 ## Screenshots
