@@ -47,6 +47,7 @@ class VRFInstanceListView(generic.ObjectListView):
 class VRFInstanceEditView(generic.ObjectEditView):
     queryset = VRFInstance.objects.all()
     form = VRFInstanceForm
+        
 
 class VRFInstanceDeleteView(generic.ObjectDeleteView):
     queryset = VRFInstance.objects.all()

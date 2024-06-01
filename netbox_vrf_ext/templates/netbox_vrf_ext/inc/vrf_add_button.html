@@ -1,0 +1,5 @@
+{% if perms.ipam.add_vrf %}
+<a href="{% url 'plugins:netbox_vrf_ext:vrfinstance_add' %}?vrf={{ object.pk }}&rd={{ object.rd }}{% if object.import_targets is not None %}&import_targets={{ object.import_targets }}{% endif %}" class="btn btn-info" role="button">
+    <i class="mdi mdi-sort" aria-hidden="true"></i> Add VRFInstance
+  </a>
+{% endif %}

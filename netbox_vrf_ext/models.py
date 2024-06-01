@@ -65,6 +65,11 @@ class VRFInstance(NetBoxModel):
         blank=True
     )
 
+    prerequisite_models = (
+        'dcim.Device',
+        'ipam.VRF'
+    )
+
     class Meta:
         verbose_name = 'VRF Instance'
         verbose_name_plural = 'VRF Instances'
