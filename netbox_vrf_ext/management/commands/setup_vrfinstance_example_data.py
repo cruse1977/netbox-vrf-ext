@@ -28,7 +28,7 @@ class Command(BaseCommand):
                     slug="manu_juniper",
                 )
         else:
-            manu_obj = Manufacturer.object.get(
+            manu_obj = Manufacturer.objects.get(
                 name="Juniper",
                 slug="manu_juniper",
             )
@@ -42,7 +42,7 @@ class Command(BaseCommand):
                     slug="devrole_router",
                 )
         else:
-            devrole_obj = DeviceRole.object.get(
+            devrole_obj = DeviceRole.objects.get(
                 name="router",
             )
 
@@ -55,7 +55,7 @@ class Command(BaseCommand):
                     status="active",
                 )
         else:
-            site_obj = Site.object.get(
+            site_obj = Site.objects.get(
                 name="Site1",
             )
         if not DeviceType.objects.filter(
@@ -76,7 +76,41 @@ class Command(BaseCommand):
             device_obj = Device.objects.create(
                 name="Router1",
                 role=devrole_obj,
-                type=devicetype_obj,
+                device_type=devicetype_obj,
+                site=site_obj,
+                status="active"
+            )
+            for x in range(0,3):
+                int_obj = Interface.objects.create(
+                    device=device_obj,
+                    name=f"et-0/0/{x}",
+                    type="100gbase-x-qsfp28",
+
+                )
+        if not Device.objects.filter(
+                name="Router2"
+        ).exists():
+            device_obj = Device.objects.create(
+                name="Router2",
+                role=devrole_obj,
+                device_type=devicetype_obj,
+                site=site_obj,
+                status="active"
+            )
+            for x in range(0,3):
+                int_obj = Interface.objects.create(
+                    device=device_obj,
+                    name=f"et-0/0/{x}",
+                    type="100gbase-x-qsfp28",
+
+                )
+        if not Device.objects.filter(
+                name="Router3"
+        ).exists():
+            device_obj = Device.objects.create(
+                name="Router3",
+                role=devrole_obj,
+                device_type=devicetype_obj,
                 site=site_obj,
                 status="active"
             )
@@ -88,60 +122,6 @@ class Command(BaseCommand):
 
                 )
 
-        ipaddress_object_type = ObjectType.objects.get_for_model(IPAddress)
-        prefix_object_type = ObjectType.objects.get_for_model(Prefix)
 
-        if options["remove"]:
-            try:
-                CustomField.objects.get(
-                    name="prefix_vrfinstance", object_types=prefix_object_type
-                ).delete()
-                if options.get("verbose"):
-                    self.stdout.write("Custom field prefix_vrfinstance removed")
-            except CustomField.DoesNotExist:
-                pass
-            try:
-                CustomField.objects.get(
-                    name="ipaddress_vrfinstance", object_types=ipaddress_object_type
-                ).delete()
-                if options.get("verbose"):
-                    self.stdout.write("Custom field ipaddress_vrfinstance removed")
-            except CustomField.DoesNotExist:
-                pass
-        else:
-            vrfinstance_object_type = ObjectType.objects.get_for_model(VRFInstance)
-            if not CustomField.objects.filter(
-                name="ipaddress_vrfinstance",
-                type=CustomFieldTypeChoices.TYPE_OBJECT,
-                object_types=ipaddress_object_type
-            ).exists():
-                cf_name = CustomField.objects.create(
-                    name="ipaddress_vrfinstance",
-                    label="VRF Instance",
-                    type=CustomFieldTypeChoices.TYPE_OBJECT,
-                    related_object_type=vrfinstance_object_type,
-                    required=False,
-                )
-                cf_name.object_types.set([ipaddress_object_type])
-                if options.get("verbose"):
-                    self.stdout.write(
-                        "Created custom field 'ipaddress_vrfinstance'"
-                    )
-            if not CustomField.objects.filter(
-                name="prefix_vrfinstance",
-                type=CustomFieldTypeChoices.TYPE_OBJECT,
-                object_types=prefix_object_type
-            ).exists():
-                cf_name = CustomField.objects.create(
-                    name="prefix_vrfinstance",
-                    label="VRF Instance",
-                    type=CustomFieldTypeChoices.TYPE_OBJECT,
-                    related_object_type=vrfinstance_object_type,
-                    required=False,
-                )
-                cf_name.object_types.set([prefix_object_type])
-                if options.get("verbose"):
-                    self.stdout.write(
-                        "Created custom field 'prefix_vrfinstance'"
-                    )
+
 
