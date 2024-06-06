@@ -1,7 +1,9 @@
 name: linting
 
 on: [push, pull_request]
-
+  paths:
+    - '**' 
+    - '!*/migrations/*.py'
 jobs:
   flake8-lint:
     runs-on: ubuntu-latest
