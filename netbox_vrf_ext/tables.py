@@ -3,11 +3,13 @@ from django.utils.translation import gettext_lazy as _
 from netbox.tables import NetBoxTable, TemplateColumn
 from .models import VRFInstance
 
+
 class RelatedVRFInstanceTable(NetBoxTable):
 
     class Meta(NetBoxTable.Meta):
         model = VRFInstance
-        fields = ('pk','id','rd', 'device')
+        fields = ('pk', 'id', 'rd', 'device')
+
 
 VRF_TARGETS = """
 {% for rt in value.all %}

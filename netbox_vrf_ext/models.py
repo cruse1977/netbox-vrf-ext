@@ -3,17 +3,19 @@ from django.urls import reverse
 from django.db import models
 from netbox.models import NetBoxModel
 
+
 class VRFInstance(NetBoxModel):
+
     """
       VRFInstance models an instance of a VRF on a Device
     """
-    
+
     vrf = models.ForeignKey(
         to='ipam.VRF',
         on_delete=models.CASCADE,
         related_name="%(class)s_related",
     )
-    
+
     device = models.ForeignKey(
         to='dcim.Device',
         on_delete=models.CASCADE,
@@ -22,7 +24,7 @@ class VRFInstance(NetBoxModel):
 
     # may/may not be weird - Cisco often uses a loopback w/ips,
     # junos doesn't require an ip on the interface but does the interface itself
-    # either way, not mandatory 
+    # either way, not mandatory
     loopback_interface = models.ForeignKey(
         to='dcim.Interface',
         on_delete=models.PROTECT,
@@ -53,12 +55,11 @@ class VRFInstance(NetBoxModel):
 
     tenant = models.ForeignKey(
         to='tenancy.Tenant',
-        on_delete = models.PROTECT,
-        blank = True,
-        null = True,
+        on_delete=models.PROTECT,
+        blank=True,
+        null=True,
         related_name='tenants'
     )
-
 
     description = models.CharField(
         max_length=200,
@@ -80,4 +81,3 @@ class VRFInstance(NetBoxModel):
 
     def get_absolute_url(self):
         return reverse('plugins:netbox_vrf_ext:vrfinstance', args=[self.pk])
-    

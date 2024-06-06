@@ -8,6 +8,7 @@ from ipam.api.serializers import NestedVRFSerializer
 from django.utils.translation import gettext_lazy as _
 from ipam.models import RouteTarget
 
+
 class VRFInstanceSerializer(NetBoxModelSerializer):
     url = serializers.HyperlinkedIdentityField(
         view_name='plugins-api:netbox_vrf_ext-api:vrfinstance-detail'
@@ -30,5 +31,7 @@ class VRFInstanceSerializer(NetBoxModelSerializer):
     class Meta:
         model = VRFInstance
         fields = (
-            'id', 'url', 'display', 'vrf', 'device', 'rd', 'import_targets', 'export_targets', 'tags', 'custom_fields', 'created', 'last_updated',
+            'id', 'url', 'display', 'vrf', 'device', 'rd',
+            'import_targets', 'export_targets', 'tags',
+            'custom_fields', 'created', 'last_updated',
         )
