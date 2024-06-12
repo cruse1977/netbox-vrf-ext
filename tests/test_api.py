@@ -10,6 +10,7 @@ from netbox_vrf_ext.models import VRFInstance
 
 class AppTest(APITestCase):
 
+
     def test_root(self):
         url = reverse("plugins-api:netbox_vrf_ext-api:api-root")
         response = self.client.get(f"{url}?format=api", **self.header)
