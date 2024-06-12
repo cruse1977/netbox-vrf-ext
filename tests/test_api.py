@@ -1,15 +1,15 @@
 from dcim.models import Device, DeviceRole, DeviceType, Manufacturer, Site
 from ipam.models import VRF
-from django.contrib.contenttypes.models import ContentType
+# from django.contrib.contenttypes.models import ContentType
 from django.urls import reverse
 from rest_framework import status
 from utilities.testing import APITestCase, APIViewTestCases
-
-from netbox_vrf_ext.models import *
+from netbox_vrf_ext.models import VRFInstance
 
 """Tests for `netbox_vrf_ext` package."""
 
 class AppTest(APITestCase):
+
     def test_root(self):
         url = reverse("plugins-api:netbox_vrf_ext-api:api-root")
         response = self.client.get(f"{url}?format=api", **self.header)
@@ -58,21 +58,20 @@ class ACLTestCase(APIViewTestCases.APIViewTestCase):
 
         vrf_instances = (
             VRFInstance(
-                vrf = vrf_1.id,
+                vrf=vrf_1.id,
                 device=device.id
             ),
             VRFInstance(
-                vrf = vrf_2.id,
+                vrf=vrf_2.id,
                 device=device.id
             ),
         )
-        
+
         VRFInstance.objects.bulk_create(vrf_instances)
 
         cls.create_data = [
             {
                 "device": device.id,
-                "vrf": vrf.id
+                "vrf": vrf_1.id
             },
         ]
-
