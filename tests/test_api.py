@@ -8,8 +8,8 @@ from netbox_vrf_ext.models import VRFInstance
 
 """Tests for `netbox_vrf_ext` package."""
 
-class AppTest(APITestCase):
 
+class AppTest(APITestCase):
 
     def test_root(self):
         url = reverse("plugins-api:netbox_vrf_ext-api:api-root")
