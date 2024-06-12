@@ -1,2 +1,6 @@
 [flake8]
 max-line-length = 120
+exclude = 
+    netbox_vrf_ext/migrations
+    configuration
+    netbox_vrf_ext/management/commands
