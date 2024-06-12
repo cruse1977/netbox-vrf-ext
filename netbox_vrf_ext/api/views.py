@@ -1,6 +1,6 @@
 from netbox.api.viewsets import NetBoxModelViewSet
-from ..models import *
-from .serializers import *
+from ..models import VRFInstance
+from .serializers import VRFInstanceSerializer
 
 
 class VRFInstanceViewSet(NetBoxModelViewSet):

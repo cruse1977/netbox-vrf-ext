@@ -17,9 +17,7 @@ class AppTest(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
 
-class ACLTestCase(
-    APIViewTestCases.APIViewTestCase,
-):
+class ACLTestCase(APIViewTestCases.APIViewTestCase):
     """Test the AccessList Test"""
 
     model = VRFInstance
