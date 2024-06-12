@@ -1,12 +1,12 @@
 from rest_framework import serializers
 from netbox.api.serializers import NetBoxModelSerializer
 from netbox.api.fields import SerializedPKRelatedField
-from ..models import *
+from ..models import VRFInstance
 from dcim.api.serializers import NestedDeviceSerializer
 from ipam.api.nested_serializers import NestedRouteTargetSerializer
 from ipam.api.serializers import NestedVRFSerializer
-from django.utils.translation import gettext_lazy as _
 from ipam.models import RouteTarget
+
 
 class VRFInstanceSerializer(NetBoxModelSerializer):
     url = serializers.HyperlinkedIdentityField(
@@ -30,5 +30,7 @@ class VRFInstanceSerializer(NetBoxModelSerializer):
     class Meta:
         model = VRFInstance
         fields = (
-            'id', 'url', 'display', 'vrf', 'device', 'rd', 'import_targets', 'export_targets', 'tags', 'custom_fields', 'created', 'last_updated',
+            'id', 'url', 'display', 'vrf', 'device', 'rd',
+            'import_targets', 'export_targets', 'tags',
+            'custom_fields', 'created', 'last_updated',
         )

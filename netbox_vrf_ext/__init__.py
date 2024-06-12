@@ -4,6 +4,7 @@ from .version import __version__
 
 
 class VRFExtConfig(PluginConfig):
+
     name = 'netbox_vrf_ext'
     verbose_name = 'netbox_vrf_ext'
     description = 'extended vrf related objects'
@@ -16,7 +17,8 @@ class VRFExtConfig(PluginConfig):
     max_version = '4.0.99'
     default_settings = {
         'device_ext_page': 'right',
-        'top_level_menu' : False,
+        'top_level_menu': False,
     }
 
-config = VRFExtConfig 
+
+config = VRFExtConfig

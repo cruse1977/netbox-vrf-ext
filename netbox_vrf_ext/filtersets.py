@@ -1,5 +1,5 @@
-from netbox.filtersets import NetBoxModelFilterSet
-from .models import netbox_vrf_ext
+# from netbox.filtersets import NetBoxModelFilterSet
+# from .models import netbox_vrf_ext
 
 
 # class netbox_vrf_extFilterSet(NetBoxModelFilterSet):
