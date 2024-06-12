@@ -4,3 +4,4 @@ exclude =
     netbox_vrf_ext/migrations
     configuration
     netbox_vrf_ext/management/commands
+    docker-develop
