@@ -72,7 +72,7 @@ class ACLTestCase(APIViewTestCases.APIViewTestCase):
         cls.create_data = [
             {
                 "device": device.id,
-                "vrf" vrf.id
+                "vrf": vrf.id
             },
         ]
 
