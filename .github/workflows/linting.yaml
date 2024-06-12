@@ -1,8 +1,6 @@
 name: linting
 
 on: [push, pull_request]
-  paths-ignore:
-    - 'netbox_vrf_ext/migrations/*.py'
 jobs:
   flake8-lint:
     runs-on: ubuntu-latest
